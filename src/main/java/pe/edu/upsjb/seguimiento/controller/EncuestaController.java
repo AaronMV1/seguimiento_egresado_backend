@@ -14,13 +14,16 @@ import pe.edu.upsjb.seguimiento.service.*;
         "http://localhost:4200",
 })
 
-public class SedeController {
+
+public class EncuestaController {
 
     @Autowired
-    SedeService sedeService;
+    EncuestaService encuestaService;
 
-    @GetMapping(value = "/consultar-sede")
-    public @ResponseBody ListaSedeResponse consultarSede() { return sedeService.consultarSede(); }
+    @PostMapping (value = "/enviar-encuesta")
+    public @ResponseBody MensajeResponse enviarEncuesta (@RequestBody EncuestaRequest request) {
+        return encuestaService.enviarEncuesta(request);
+    }
 
 }
 
