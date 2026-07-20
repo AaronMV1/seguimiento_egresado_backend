@@ -26,6 +26,9 @@ public class EncuestaServiceImpl implements EncuestaService {
         return encuestaDao.enviarEncuesta(request);
     }
 
+    public ListaEncuestadosResponse consultarEncuestados() {
+        return encuestaDao.consultarEncuestados();
+    }
 
 }
 

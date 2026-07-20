@@ -11,5 +11,7 @@ public interface EncuestaService {
 
     public MensajeResponse enviarEncuesta(EncuestaRequest request);
 
+    public ListaEncuestadosResponse consultarEncuestados();
+
 
 }

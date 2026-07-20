@@ -14,13 +14,15 @@ import pe.edu.upsjb.seguimiento.service.*;
         "http://localhost:4200",
 })
 
+
 public class SedeController {
 
     @Autowired
     SedeService sedeService;
 
     @GetMapping(value = "/consultar-sede")
-    public @ResponseBody ListaSedeResponse consultarSede() { return sedeService.consultarSede(); }
+    public @ResponseBody ListaSedeResponse consultarSede() {
+        return sedeService.consultarSede();
+    }
 
 }
-

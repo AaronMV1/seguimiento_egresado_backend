@@ -10,9 +10,7 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upsjb.seguimiento.dto.*;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.*;
 
 
 @Repository
@@ -191,6 +189,82 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
         return response;
 
     }
+
+    public ListaEncuestadosResponse consultarEncuestados() {
+
+        ListaEncuestadosResponse response = new ListaEncuestadosResponse();
+        response.setLista(new ArrayList<>());
+
+        try {
+
+            Connection con = getConnection();
+
+            PreparedStatement psSelect = con.prepareStatement(
+                    " SELECT " +
+                            " e.egresado_id, " +
+                            " e.tipo_documento, " +
+                            " e.numero_documento, " +
+                            " e.nombres_apellidos, " +
+                            " e.genero, " +
+
+                            " e.sede_id, " +
+                            " s.nombre AS sede_nombre, " +
+
+                            " e.facultad_id, " +
+                            " f.nombre AS facultad_nombre, " +
+
+                            " e.carrera_id, " +
+                            " c.nombre AS carrera_nombre, " +
+
+                            " e.anio_egreso, " +
+                            " e.correo_electronico, " +
+                            " e.numero_celular " +
+
+                            " FROM seguimiento_egresado.egresado e " +
+
+                            " LEFT JOIN seguimiento_egresado.sede s " +
+                            " ON e.sede_id = s.id " +
+
+                            " LEFT JOIN seguimiento_egresado.facultad f " +
+                            " ON e.facultad_id = f.id " +
+
+                            " LEFT JOIN seguimiento_egresado.carrera c " +
+                            " ON e.carrera_id = c.id"
+            );
+
+            ResultSet rs = psSelect.executeQuery();
+
+            while (rs.next()) {
+                EncuestaResponse dto = new EncuestaResponse();
+                dto.setEgresadoId(rs.getInt("egresado_id"));
+                dto.setTipoDocumento(rs.getString("tipo_documento"));
+                dto.setNumeroDocumento(rs.getString("numero_documento"));
+                dto.setNombresApellidos(rs.getString("nombres_apellidos"));
+                dto.setGenero(rs.getString("genero"));
+                dto.setSede(rs.getString("sede_nombre"));
+                dto.setFacultad(rs.getString("facultad_nombre"));
+                dto.setCarrera(rs.getString("carrera_nombre"));
+                dto.setAnioEgreso(rs.getString("anio_egreso"));
+                dto.setCorreoElectronico(rs.getString("correo_electronico"));
+                dto.setNumeroCelular(rs.getString("numero_celular"));
+                response.getLista().add(dto);
+            }
+
+            System.out.println("Obteniendo Lista de Encuestados");
+
+            psSelect.close();
+            con.close();
+
+        } catch (SQLException e) {
+
+            throw new RuntimeException(e);
+
+        }
+
+        return response;
+
+    }
+
 
 }
 

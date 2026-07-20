@@ -9,11 +9,8 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upsjb.seguimiento.dto.*;
 
 import javax.xml.transform.Result;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.*;
+import java.util.*;
 
 
 @Repository
@@ -24,6 +21,7 @@ public class SedeDaoImpl extends Dao implements SedeDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
 
     public ListaSedeResponse consultarSede () {
 

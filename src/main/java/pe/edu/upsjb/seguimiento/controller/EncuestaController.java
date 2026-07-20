@@ -25,5 +25,10 @@ public class EncuestaController {
         return encuestaService.enviarEncuesta(request);
     }
 
+    @GetMapping (value = "/consultar-encuestados")
+    public @ResponseBody ListaEncuestadosResponse consultarEncuestados() {
+        return encuestaService.consultarEncuestados();
+    }
+
 }
 

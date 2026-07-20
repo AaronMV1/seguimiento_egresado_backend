@@ -11,6 +11,7 @@ public interface EncuestaDao {
 
     public MensajeResponse enviarEncuesta (EncuestaRequest request);
 
+    public ListaEncuestadosResponse consultarEncuestados();
 
 }
 
