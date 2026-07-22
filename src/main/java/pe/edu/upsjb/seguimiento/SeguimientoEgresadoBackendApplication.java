@@ -1,3 +1,5 @@
+
+
 package pe.edu.upsjb.seguimiento;
 
 import org.springframework.boot.SpringApplication;
@@ -11,3 +13,4 @@ public class SeguimientoEgresadoBackendApplication {
     }
 
 }
+
