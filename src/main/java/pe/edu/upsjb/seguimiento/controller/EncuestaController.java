@@ -10,10 +10,6 @@ import pe.edu.upsjb.seguimiento.service.*;
 
 
 @RestController
-@CrossOrigin(origins = {
-        "http://localhost:4200",
-        "http://172.20.14.250:4200",
-})
 
 
 public class EncuestaController {

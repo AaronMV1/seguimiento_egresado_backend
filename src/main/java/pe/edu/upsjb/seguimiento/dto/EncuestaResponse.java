@@ -43,4 +43,6 @@ public class EncuestaResponse {
     public void setCorreoElectronico(String correoElectronico) { this.correoElectronico = correoElectronico; }
     public void setNumeroCelular(String numeroCelular) { this.numeroCelular = numeroCelular; }
 
+
 }
+

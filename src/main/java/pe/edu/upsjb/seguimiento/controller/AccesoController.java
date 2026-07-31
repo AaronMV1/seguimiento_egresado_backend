@@ -12,14 +12,15 @@ import pe.edu.upsjb.seguimiento.service.*;
 @RestController
 
 
-public class SedeController {
+public class AccesoController {
+
 
     @Autowired
-    SedeService sedeService;
+    AccesoService accesoService;
 
-    @GetMapping(value = "/consultar-sede")
-    public @ResponseBody ListaSedeResponse consultarSede() {
-        return sedeService.consultarSede();
+    @PostMapping (value="/enviar-login")
+    public @ResponseBody MensajeResponse enviarLogin (@RequestBody LoginRequest request) {
+        return accesoService.enviarLogin(request);
     }
 
 }
