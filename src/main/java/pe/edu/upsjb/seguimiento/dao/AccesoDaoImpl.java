@@ -29,10 +29,8 @@ public class AccesoDaoImpl extends Dao implements AccesoDao {
     @Override
     public MensajeResponse enviarLogin(LoginRequest request) {
 
-
         MensajeResponse response = new MensajeResponse();
         Connection con = null;
-
 
         try {
 
@@ -42,7 +40,7 @@ public class AccesoDaoImpl extends Dao implements AccesoDao {
                     " SELECT administrador_id, correo_electronico, contrasena_hash, rol_usuario " +
                             " FROM seguimiento_egresado.administrador " +
                             " WHERE correo_electronico = ? " +
-                            " AND activo = TRUE"
+                            " AND activo = TRUE "
             );
 
             ps.setString(1, request.getCorreo());
@@ -89,6 +87,7 @@ public class AccesoDaoImpl extends Dao implements AccesoDao {
                 response.setMensaje("Usuario o contraseña incorrectos. 3");
 
                 return response;
+
             }
 
             response.setEstado("200");

@@ -16,11 +16,15 @@ public class EncuestaRequest {
     private int anioEgreso;
     private String correoElectronico;
     private String numeroCelular;
+
+    private int fase;
+
     private String fase1participacion;
     private String fase1situacion;
     private String fase1trabajando;
     private String fase1primerempleo;
     private String fase1medios;
+
     private String fase2satisfaccionestudios;
     private String fase2participacion;
     private String fase2satisfaccionservicio;
@@ -29,12 +33,17 @@ public class EncuestaRequest {
     private String fase2empresaempleadornombre;
     private String fase2empresaempleadorcorreo;
     private String fase2empresaempleadornumero;
+
     private String fase3especialidad;
     private String fase3participacion;
     private String fase3educacioncontinua;
+
     private String fase4investigacion;
+    private String fase4participacion;
+    private String fase4resultados;
     private String fase4innovacion;
-    private String fase4satisfaccion;
+    private String fase4capacitacion;
+    private String fase4formacion;
 
 
     public String getTipoDocumento() { return tipoDocumento; }
@@ -47,6 +56,7 @@ public class EncuestaRequest {
     public int getAnioEgreso() { return anioEgreso; }
     public String getCorreoElectronico() { return correoElectronico; }
     public String getNumeroCelular() { return numeroCelular; }
+    public int getFase() { return fase; }
     public String getFase1participacion() { return fase1participacion; }
     public String getFase1situacion() { return fase1situacion; }
     public String getFase1trabajando() { return fase1trabajando; }
@@ -64,8 +74,12 @@ public class EncuestaRequest {
     public String getFase3participacion() { return fase3participacion; }
     public String getFase3educacioncontinua() { return fase3educacioncontinua; }
     public String getFase4investigacion() { return fase4investigacion; }
+    public String getFase4participacion() { return fase4participacion; }
+    public String getFase4resultados() { return fase4resultados; }
     public String getFase4innovacion() { return fase4innovacion; }
-    public String getFase4satisfaccion() { return fase4satisfaccion; }
+    public String getFase4capacitacion() { return fase4capacitacion; }
+    public String getFase4formacion() { return fase4formacion; }
+
 
     public void setTipoDocumento(String tipoDocumento) { this.tipoDocumento = tipoDocumento; }
     public void setNumeroDocumento(String numeroDocumento) { this.numeroDocumento = numeroDocumento; }
@@ -77,6 +91,7 @@ public class EncuestaRequest {
     public void setAnioEgreso(int anioEgreso) { this.anioEgreso = anioEgreso; }
     public void setCorreoElectronico(String correoElectronico) { this.correoElectronico = correoElectronico; }
     public void setNumeroCelular(String numeroCelular) { this.numeroCelular = numeroCelular; }
+    public void setFase(int fase) { this.fase = fase; }
     public void setFase1participacion(String fase1participacion) { this.fase1participacion = fase1participacion; }
     public void setFase1situacion(String fase1situacion) { this.fase1situacion = fase1situacion; }
     public void setFase1trabajando(String fase1trabajando) { this.fase1trabajando = fase1trabajando; }
@@ -94,8 +109,15 @@ public class EncuestaRequest {
     public void setFase3participacion(String fase3participacion) { this.fase3participacion = fase3participacion; }
     public void setFase3educacioncontinua(String fase3educacioncontinua) { this.fase3educacioncontinua = fase3educacioncontinua; }
     public void setFase4investigacion(String fase4investigacion) { this.fase4investigacion = fase4investigacion; }
+    public void setFase4participacion(String fase4participacion) { this.fase4participacion = fase4participacion; }
+    public void setFase4resultados(String fase4resultados) { this.fase4resultados = fase4resultados; }
     public void setFase4innovacion(String fase4innovacion) { this.fase4innovacion = fase4innovacion; }
-    public void setFase4satisfaccion(String fase4satisfaccion) { this.fase4satisfaccion = fase4satisfaccion; }
+    public void setFase4capacitacion(String fase4capacitacion) { this.fase4capacitacion = fase4capacitacion; }
+    public void setFase4formacion(String fase4formacion) { this.fase4formacion = fase4formacion; }
+
+
+
+
 
 
 }
