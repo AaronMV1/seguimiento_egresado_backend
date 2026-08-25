@@ -31,6 +31,9 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
         Connection con = null;
 
 
+        System.out.println("Enviar Encuesta");
+
+
         try {
 
 
@@ -55,8 +58,8 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
 
 
             if (rs.next()) {
-                //region    ACTUALIZAR DATOS
 
+                //region    ACTUALIZAR DATOS
 
                 egresadoId = rs.getLong("egresado_id");
 
@@ -97,8 +100,8 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
             }
 
             else {
-                //region    REGISTRAR EGRESADO
 
+                //region    REGISTRAR EGRESADO
 
                 PreparedStatement psInsertEgresado = con.prepareStatement(
                         "INSERT INTO seguimiento_egresado.egresado (" +
@@ -153,8 +156,8 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
 
             //region    REGISTRAR SEGUIMIENTO
 
-            // int anioSeguimiento = LocalDate.now().getYear();         //  PRODUCCION
-            int anioSeguimiento = 2021;                                 //  TEST
+            int anioSeguimiento = LocalDate.now().getYear();         //  PRODUCCION
+            // int anioSeguimiento = 2022;                                 //  TEST
 
             PreparedStatement psInsertSeguimiento = con.prepareStatement(
                     " INSERT INTO seguimiento_egresado.seguimiento (" +
@@ -342,6 +345,9 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
             rs.close();
             psBuscarEgresado.close();
             con.commit();
+
+
+            System.out.println("Recibir Encuesta");
 
 
             response.setEstado("200");
