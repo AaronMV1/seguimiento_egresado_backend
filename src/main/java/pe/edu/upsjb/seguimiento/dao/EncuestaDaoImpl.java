@@ -419,7 +419,16 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
 
                             " e.anio_egreso, " +
                             " e.correo_electronico, " +
-                            " e.numero_celular " +
+                            " e.numero_celular, " +
+                            " f1.fase1_participacion, f1.fase1_situacion, f1.fase1_trabajando, " +
+                            " f1.fase1_primerempleo, f1.fase1_medios, " +
+                            " f2.fase2_satisfaccionestudios, f2.fase2_participacion, " +
+                            " f2.fase2_satisfaccionservicio, f2.fase2_planificacion, " +
+                            " f2.fase2_empresanombre, f2.fase2_empresaempleadornombre, " +
+                            " f2.fase2_empresaempleadorcorreo, f2.fase2_empresaempleadornumero, " +
+                            " f3.fase3_especialidad, f3.fase3_participacion, f3.fase3_educacioncontinua, " +
+                            " f4.fase4_investigacion, f4.fase4_participacion, f4.fase4_resultados, " +
+                            " f4.fase4_innovacion, f4.fase4_capacitacion, f4.fase4_formacion " +
 
                             " FROM seguimiento_egresado.egresado e " +
 
@@ -430,7 +439,19 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
                             " ON e.facultad_id = f.id " +
 
                             " LEFT JOIN seguimiento_egresado.carrera c " +
-                            " ON e.carrera_id = c.id"
+                            " ON e.carrera_id = c.id " +
+                            " LEFT JOIN LATERAL (SELECT sf.* FROM seguimiento_egresado.seguimiento_fase_1 sf " +
+                            " JOIN seguimiento_egresado.seguimiento s ON s.seguimiento_id = sf.seguimiento_id " +
+                            " WHERE s.egresado_id = e.egresado_id ORDER BY s.anio_seguimiento DESC, s.seguimiento_id DESC LIMIT 1) f1 ON TRUE " +
+                            " LEFT JOIN LATERAL (SELECT sf.* FROM seguimiento_egresado.seguimiento_fase_2 sf " +
+                            " JOIN seguimiento_egresado.seguimiento s ON s.seguimiento_id = sf.seguimiento_id " +
+                            " WHERE s.egresado_id = e.egresado_id ORDER BY s.anio_seguimiento DESC, s.seguimiento_id DESC LIMIT 1) f2 ON TRUE " +
+                            " LEFT JOIN LATERAL (SELECT sf.* FROM seguimiento_egresado.seguimiento_fase_3 sf " +
+                            " JOIN seguimiento_egresado.seguimiento s ON s.seguimiento_id = sf.seguimiento_id " +
+                            " WHERE s.egresado_id = e.egresado_id ORDER BY s.anio_seguimiento DESC, s.seguimiento_id DESC LIMIT 1) f3 ON TRUE " +
+                            " LEFT JOIN LATERAL (SELECT sf.* FROM seguimiento_egresado.seguimiento_fase_4 sf " +
+                            " JOIN seguimiento_egresado.seguimiento s ON s.seguimiento_id = sf.seguimiento_id " +
+                            " WHERE s.egresado_id = e.egresado_id ORDER BY s.anio_seguimiento DESC, s.seguimiento_id DESC LIMIT 1) f4 ON TRUE"
             );
 
             ResultSet rs = psSelect.executeQuery();
@@ -448,6 +469,28 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
                 dto.setAnioEgreso(rs.getString("anio_egreso"));
                 dto.setCorreoElectronico(rs.getString("correo_electronico"));
                 dto.setNumeroCelular(rs.getString("numero_celular"));
+                dto.setFase1Participacion(rs.getString("fase1_participacion"));
+                dto.setFase1Situacion(rs.getString("fase1_situacion"));
+                dto.setFase1Trabajando(rs.getString("fase1_trabajando"));
+                dto.setFase1Primerempleo(rs.getString("fase1_primerempleo"));
+                dto.setFase1Medios(rs.getString("fase1_medios"));
+                dto.setFase2Satisfaccionestudios(rs.getString("fase2_satisfaccionestudios"));
+                dto.setFase2Participacion(rs.getString("fase2_participacion"));
+                dto.setFase2Satisfaccionservicio(rs.getString("fase2_satisfaccionservicio"));
+                dto.setFase2Planificacion(rs.getString("fase2_planificacion"));
+                dto.setFase2Empresanombre(rs.getString("fase2_empresanombre"));
+                dto.setFase2Empresaempleadornombre(rs.getString("fase2_empresaempleadornombre"));
+                dto.setFase2Empresaempleadorcorreo(rs.getString("fase2_empresaempleadorcorreo"));
+                dto.setFase2Empresaempleadornumero(rs.getString("fase2_empresaempleadornumero"));
+                dto.setFase3Especialidad(rs.getString("fase3_especialidad"));
+                dto.setFase3Participacion(rs.getString("fase3_participacion"));
+                dto.setFase3Educacioncontinua(rs.getString("fase3_educacioncontinua"));
+                dto.setFase4Investigacion(rs.getString("fase4_investigacion"));
+                dto.setFase4Participacion(rs.getString("fase4_participacion"));
+                dto.setFase4Resultados(rs.getString("fase4_resultados"));
+                dto.setFase4Innovacion(rs.getString("fase4_innovacion"));
+                dto.setFase4Capacitacion(rs.getString("fase4_capacitacion"));
+                dto.setFase4Formacion(rs.getString("fase4_formacion"));
                 response.getLista().add(dto);
             }
 
