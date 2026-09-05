@@ -159,6 +159,34 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
             int anioSeguimiento = LocalDate.now().getYear();         //  PRODUCCION
             // int anioSeguimiento = 2022;                                 //  TEST
 
+            /* Validar que el egresado no haya completado ya la encuesta este año. */
+            PreparedStatement psVerificarSeguimiento = con.prepareStatement(
+                    "SELECT seguimiento_id " +
+                            "FROM seguimiento_egresado.seguimiento " +
+                            "WHERE egresado_id = ? " +
+                            "AND anio_seguimiento = ?"
+            );
+
+            psVerificarSeguimiento.setLong(1, egresadoId);
+            psVerificarSeguimiento.setInt(2, anioSeguimiento);
+
+            ResultSet rsVerificarSeguimiento = psVerificarSeguimiento.executeQuery();
+            boolean yaCompletoEsteAnio = rsVerificarSeguimiento.next();
+
+            rsVerificarSeguimiento.close();
+            psVerificarSeguimiento.close();
+
+            if (yaCompletoEsteAnio) {
+
+                con.rollback();
+
+                response.setEstado("409");
+                response.setMensaje("El egresado ya completó la encuesta de seguimiento correspondiente al año " + anioSeguimiento + ".");
+
+                return response;
+
+            }
+
             PreparedStatement psInsertSeguimiento = con.prepareStatement(
                     " INSERT INTO seguimiento_egresado.seguimiento (" +
                             " egresado_id, " +
@@ -384,6 +412,55 @@ public class EncuestaDaoImpl extends Dao implements EncuestaDao {
                 }
 
             }
+
+        }
+
+        return response;
+
+    }
+
+    public MensajeResponse verificarEncuesta(String tipoDocumento, String numeroDocumento) {
+
+        MensajeResponse response = new MensajeResponse();
+
+        int anioSeguimiento = LocalDate.now().getYear();
+
+        try (Connection con = getConnection()) {
+
+            PreparedStatement psVerificar = con.prepareStatement(
+                    "SELECT s.seguimiento_id " +
+                            "FROM seguimiento_egresado.seguimiento s " +
+                            "JOIN seguimiento_egresado.egresado e ON e.egresado_id = s.egresado_id " +
+                            "WHERE e.tipo_documento = ? " +
+                            "AND e.numero_documento = ? " +
+                            "AND s.anio_seguimiento = ?"
+            );
+
+            psVerificar.setString(1, tipoDocumento);
+            psVerificar.setString(2, numeroDocumento);
+            psVerificar.setInt(3, anioSeguimiento);
+
+            ResultSet rs = psVerificar.executeQuery();
+
+            if (rs.next()) {
+
+                response.setEstado("409");
+                response.setMensaje("El egresado ya completó la encuesta de seguimiento correspondiente al año " + anioSeguimiento + ".");
+
+            } else {
+
+                response.setEstado("200");
+                response.setMensaje("El egresado aún no ha completado la encuesta de este año.");
+
+            }
+
+            rs.close();
+            psVerificar.close();
+
+        } catch (Exception e) {
+
+            response.setEstado("500");
+            response.setMensaje("Error al verificar la encuesta: " + e.getMessage());
 
         }
 

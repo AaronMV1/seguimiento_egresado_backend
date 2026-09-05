@@ -11,6 +11,8 @@ public interface EncuestaService {
 
     public MensajeResponse enviarEncuesta(EncuestaRequest request);
 
+    public MensajeResponse verificarEncuesta(String tipoDocumento, String numeroDocumento);
+
     public ListaEncuestadosResponse consultarEncuestados();
 
 

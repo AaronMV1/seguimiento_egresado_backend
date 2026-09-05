@@ -26,6 +26,10 @@ public class EncuestaServiceImpl implements EncuestaService {
         return encuestaDao.enviarEncuesta(request);
     }
 
+    public MensajeResponse verificarEncuesta (String tipoDocumento, String numeroDocumento) {
+        return encuestaDao.verificarEncuesta(tipoDocumento, numeroDocumento);
+    }
+
     public ListaEncuestadosResponse consultarEncuestados() {
         return encuestaDao.consultarEncuestados();
     }

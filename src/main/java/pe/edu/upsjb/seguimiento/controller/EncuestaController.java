@@ -22,6 +22,14 @@ public class EncuestaController {
         return encuestaService.enviarEncuesta(request);
     }
 
+    @GetMapping (value = "/verificar-encuesta")
+    public @ResponseBody MensajeResponse verificarEncuesta (
+            @RequestParam String tipoDocumento,
+            @RequestParam String numeroDocumento
+    ) {
+        return encuestaService.verificarEncuesta(tipoDocumento, numeroDocumento);
+    }
+
     @GetMapping (value = "/consultar-encuestados")
     public @ResponseBody ListaEncuestadosResponse consultarEncuestados() {
         return encuestaService.consultarEncuestados();
